@@ -72,3 +72,5 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"

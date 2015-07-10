@@ -1,4 +1,3 @@
-#
 # Executes commands at the start of an interactive session.
 #
 # Authors:
@@ -10,4 +9,125 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+# Custom Options
+# ==============
+clear
+
+export EDITOR='nvim'
+export PATH="$PATH:$HOME/bin:$HOME/code"
+export DOT='/home/central/Dropbox/dotmatrix'
+export TERM=screen-256color-bce     # proper color handling of the terminal
+
+# vim mode in shell o_O
+bindkey -v
+export KEYTIMEOUT=1
+
+# prevent LMDE screen go black after 10min idle time.
+xset s off
+
+# markdown function that also takes parameters
+markdown_alias(){
+  markdown $1 >! ~/tmp/.md.html && w3m ~/tmp/.md.html
+}
+
+# aliases
+# -------
+
+alias zrc="nvim ~/.zshrc"
+alias neo="nvim"
+
+# customize core commands
+alias sudo='sudo env PATH=$PATH'
+alias ll='ls -lAh --color=auto'
+alias lt='ls -Ahot --color=auto'
+alias la='ls -Ah --color=auto'
+alias rm='trash-put -v'
+alias mv='mv -v'
+alias cp='rsync -va --progress'
+alias gh='history | grep'
+alias dudir='du -sh'
+alias off='sudo shutdown -Ph now '
+alias reboot='sudo shutdown -r now '
+alias suspend='sudo pm-suspend'
+alias apt-get='sudo apt-get'
+alias cpuset='sudo cpufreq-set -rg'
+alias imap='offlineimap -u basic'
+
+# System:
+alias md='markdown_alias'
+alias soz="source $HOME/.zshrc && echo 'ZSH --reloaded' && sleep .3 && clear"
+
+# coding stuff
+alias ipy2='ipython'
+alias ipy='ipython3'
+
+# nosetests + coverage
+nosetests_cover_cmd="nosetests --with-coverage --cover-erase --cover-tests --cover-package=\$(ls *.py | sed -r 's/[.]py$//' | fgrep -v '.' | paste -s -d ',' )"
+alias nosecover=$nosetests_cover_cmd
+
+# youtube & downloads
+alias ydl='cd ~/wget/vid && youtube-dl -o "%(title)s.%(ext)s"'
+alias ydh='youtube-dl -o "%(title)s.%(ext)s"'
+alias ydla='cd ~/wget/vid && youtube-dl --extract-audio --audio-format=mp3 -o "%(title)s.%(ext)si"'
+alias ypurge='cd ~/wget/vid/purge && youtube-dl  --playlist-end 15 -o "%(title)s.%(ext)s" "https://www.youtube.com/user/PurgeGamers/videos?view=0&shelf_id=0&sort=dd"'
+alias yetho='cd ~/wget/vid/etho && youtube-dl  --playlist-end 15 -o "%(title)s.%(ext)s"  "https://www.youtube.com/user/EthosLab/videos"'
+alias ybaumi='cd ~/wget/vid/baumi && youtube-dl  --playlist-end 15 -o "%(title)s.%(ext)s"  "https://www.youtube.com/user/l34um1/videos"'
+alias ybts='cd ~/wget/vid/BTS && youtube-dl --playlist-end 20 -o "%(title)s.%(ext)s" https://www.youtube.com/user/beyondthesummittv/videos'
+alias scdl='/home/gsec/repos/soundcloud-dl/scdl'
+
+#livestreamer for twitch.tv streams
+alias live='livestreamer --output ~/tmp/stream.flv'
+alias stream='mplayer ~/tmp/stream.flv'
+
+# Truecrypt quickmounts
+alias tcm='truecrypt -t -k "" --protect-hidden=no'
+alias tcsec='truecrypt -t -k "" --protect-hidden=no ~/.sec/transfer.tc /mnt/sec'
+alias tcd='truecrypt -d'
+alias d2='wine /home/gsec/.wine/drive_c/Program\ Files\ \(x86\)/Diablo\ II/Game.exe'
+
+# server & connections
+alias ts3='~/wget/installer/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
+alias link='sudo ~/bin/link.sh'
+alias radar='sudo ~/bin/radar.sh'
+alias uber="ssh ez@canopus.uberspace.de"
+alias vpn="/opt/cisco/anyconnect/bin/vpnui"
+alias sprungbrett='ssh -X s218297@cipgate.informatik.uni-wuerzburg.de'
+alias ez="python $HOME/repos/eZchat/ez_cli.py Guilherme -sS"
+
+# configs
+alias sys='nvim ~/config/help/SYSCONFIG.txt'
+alias vimrc='vim ~/.vimrc'
+alias nvimrc='nvim ~/.nvimrc'
+alias bashrc='nvim ~/.bashrc'
+alias gitrc='nvim ~/.gitconfig'
+alias rangerrc='nvim ~/.config/ranger/rc.conf'
+alias muttrc='nvim ~/.mutt/muttrc'
+alias orc='nvim ~/.offlineimaprc'
+alias tmuxrc='nvim ~/.byobu/.tmux.conf'
+alias cmusrc='nvim ~/.cmus/rc'
+alias qbrc='nvim ~/.config/qutebrowser/qutebrowser.conf'
+alias dotarc='nvim /data/games/steam/steamapps/common/dota\ 2\ beta/dota/cfg/autoexec'
+
+# suffix aliases:
+alias -s tex=nvim
+alias -s txt=nvim
+alias -s cfg=nvim
+alias -s pdf=zathura
+alias -s mp4=mplayer
+alias -s flt=mplayer
+alias -s mkv=mplayer
+
+# git shortcuts
+alias gaa='git add .'
+alias gau='git add -u .'
+alias gaf='git add -f'
+alias gap='git add -p'
+alias gas='git status'
+alias gls='git symbolic-ref HEAD | xargs git ls-tree --name-only | xargs du -hs'
+alias grm='git rm -rf --cached'
+alias commit='~/bin/commit_homedir.sh'
+
+# gitgraph output command
+alias gitgraph="git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold
+magenta)(%ar)%C(reset) %C(bold green)%s%C(reset) %C(green)— %an%C(reset)%C(bold
+yellow)%d%C(reset)' --abbrev-commit --date=relative"
