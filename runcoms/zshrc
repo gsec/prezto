@@ -1,29 +1,39 @@
 # Executes commands at the start of an interactive session.
 #
 # Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   ((-1-)) Sorin Ionescu <sorin.ionescu@gmail.com>
+#   ((-2-)) Guilherme Stein <o0v0o.ix@gmail.com>
 #
 
+# ((-1-))
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# ((-2-))
 # Custom Options
 # ==============
-clear
-
 export EDITOR='nvim'
 export PATH="$PATH:$HOME/bin:$HOME/code"
 export DOT='/home/central/Dropbox/dotmatrix'
 export TERM=screen-256color-bce     # proper color handling of the terminal
+export RELOAD_MSG='ZSH has been  ==>  ~ R E L O A D E D ~'
+
+# eZchat
+export ez_host='95.143.172.252'
+export ez_port=64835
+# eZchat repo
+export EZCHAT_PATH="$HOME/repos/eZchat"
+export PYTHONPATH="$PYTHONPATH:$EZCHAT_PATH"
+# vim-eZchat repo
+export VIM_EZCHAT_PATH="$HOME/.vim/bundle/vim-eZchat"
+export PYTHONPATH="$PYTHONPATH:$VIM_EZCHAT_PATH/autoload"
+export PYTHONPATH="$PYTHONPATH:$HOME/.nvim/plugged/vim-eZchat/autoload"
 
 # vim mode in shell o_O
 bindkey -v
 export KEYTIMEOUT=1
-
-# prevent LMDE screen go black after 10min idle time.
-xset s off
 
 # markdown function that also takes parameters
 markdown_alias(){
@@ -34,10 +44,11 @@ markdown_alias(){
 # -------
 
 alias zrc="nvim ~/.zshrc"
-alias neo="nvim"
+alias vim="nvim"
 
 # customize core commands
-alias sudo='sudo env PATH=$PATH'
+alias sudo='sudo '          # <Space> needed to expand aliases with 'sudo'
+#alias log-out='gnome-session-quit'
 alias ll='ls -lAh --color=auto'
 alias lt='ls -Ahot --color=auto'
 alias la='ls -Ah --color=auto'
@@ -55,7 +66,7 @@ alias imap='offlineimap -u basic'
 
 # System:
 alias md='markdown_alias'
-alias soz="source $HOME/.zshrc && echo 'ZSH --reloaded' && sleep .3 && clear"
+alias soz='source $HOME/.zshrc && echo $RELOAD_MSG && sleep .3 && clear'
 
 # coding stuff
 alias ipy2='ipython'
@@ -69,10 +80,10 @@ alias nosecover=$nosetests_cover_cmd
 alias ydl='cd ~/wget/vid && youtube-dl -o "%(title)s.%(ext)s"'
 alias ydh='youtube-dl -o "%(title)s.%(ext)s"'
 alias ydla='cd ~/wget/vid && youtube-dl --extract-audio --audio-format=mp3 -o "%(title)s.%(ext)si"'
-alias ypurge='cd ~/wget/vid/purge && youtube-dl  --playlist-end 15 -o "%(title)s.%(ext)s" "https://www.youtube.com/user/PurgeGamers/videos?view=0&shelf_id=0&sort=dd"'
-alias yetho='cd ~/wget/vid/etho && youtube-dl  --playlist-end 15 -o "%(title)s.%(ext)s"  "https://www.youtube.com/user/EthosLab/videos"'
-alias ybaumi='cd ~/wget/vid/baumi && youtube-dl  --playlist-end 15 -o "%(title)s.%(ext)s"  "https://www.youtube.com/user/l34um1/videos"'
-alias ybts='cd ~/wget/vid/BTS && youtube-dl --playlist-end 20 -o "%(title)s.%(ext)s" https://www.youtube.com/user/beyondthesummittv/videos'
+alias ypurge='cd ~/wget/vid/purge && youtube-dl  --playlist-end 10 -o "%(title)s.%(ext)s" "https://www.youtube.com/user/PurgeGamers/videos?view=0&shelf_id=0&sort=dd"'
+alias yetho='cd ~/wget/vid/etho && youtube-dl  --playlist-end 10 -o "%(title)s.%(ext)s"  "https://www.youtube.com/user/EthosLab/videos"'
+alias ybaumi='cd ~/wget/vid/baumi && youtube-dl  --playlist-end 10 -o "%(title)s.%(ext)s"  "https://www.youtube.com/user/l34um1/videos"'
+alias ybts='cd ~/wget/vid/BTS && youtube-dl --playlist-end 10 -o "%(title)s.%(ext)s" https://www.youtube.com/user/beyondthesummittv/videos'
 alias scdl='/home/gsec/repos/soundcloud-dl/scdl'
 
 #livestreamer for twitch.tv streams
@@ -83,7 +94,7 @@ alias stream='mplayer ~/tmp/stream.flv'
 alias tcm='truecrypt -t -k "" --protect-hidden=no'
 alias tcsec='truecrypt -t -k "" --protect-hidden=no ~/.sec/transfer.tc /mnt/sec'
 alias tcd='truecrypt -d'
-alias d2='wine /home/gsec/.wine/drive_c/Program\ Files\ \(x86\)/Diablo\ II/Game.exe'
+alias d2="cd $HOME/tmp && wine /home/gsec/.wine/drive_c/Program\ Files\ \(x86\)/Diablo\ II/Game.exe"
 
 # server & connections
 alias ts3='~/wget/installer/TeamSpeak3-Client-linux_amd64/ts3client_runscript.sh'
@@ -93,6 +104,7 @@ alias uber="ssh ez@canopus.uberspace.de"
 alias vpn="/opt/cisco/anyconnect/bin/vpnui"
 alias sprungbrett='ssh -X s218297@cipgate.informatik.uni-wuerzburg.de'
 alias ez="python $HOME/repos/eZchat/ez_cli.py Guilherme -sS"
+alias ksp="primusrun $HOME/wget/games/KSP_linux/KSP.x86_64"
 
 # configs
 alias sys='nvim ~/config/help/SYSCONFIG.txt'
