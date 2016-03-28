@@ -30,6 +30,8 @@ export PYTHONPATH="$PYTHONPATH:$EZCHAT_PATH"
 export VIM_EZCHAT_PATH="$HOME/.vim/bundle/vim-eZchat"
 export PYTHONPATH="$PYTHONPATH:$VIM_EZCHAT_PATH/autoload"
 export PYTHONPATH="$PYTHONPATH:$HOME/.nvim/plugged/vim-eZchat/autoload"
+# soundcloud2000 ID
+export SC_CLIENT_ID=c87ab76f0a493ed360dc626303bbe9e5 soundcloud2000
 
 # vim mode in shell o_O
 bindkey -v
@@ -70,7 +72,7 @@ alias soz='source $HOME/.zshrc && echo $RELOAD_MSG && sleep .3 && clear'
 
 # coding stuff
 alias ipy2='ipython'
-alias ipy='ipython3'
+alias ipy='ipython3 --profile=gsec'
 
 # nosetests + coverage
 nosetests_cover_cmd="nosetests --with-coverage --cover-erase --cover-tests --cover-package=\$(ls *.py | sed -r 's/[.]py$//' | fgrep -v '.' | paste -s -d ',' )"
@@ -137,9 +139,11 @@ alias gap='git add -p'
 alias gas='git status'
 alias gls='git symbolic-ref HEAD | xargs git ls-tree --name-only | xargs du -hs'
 alias grm='git rm -rf --cached'
+alias gig='vim .gitignore'
 alias commit='~/bin/commit_homedir.sh'
 
 # gitgraph output command
 alias gitgraph="git log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold
 magenta)(%ar)%C(reset) %C(bold green)%s%C(reset) %C(green)— %an%C(reset)%C(bold
 yellow)%d%C(reset)' --abbrev-commit --date=relative"
+alias ipyrc='nvim /home/gsec/.config/ipython/profile_gsec/ipython_config.py'
